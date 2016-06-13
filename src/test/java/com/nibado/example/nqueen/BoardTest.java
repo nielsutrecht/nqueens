@@ -3,7 +3,7 @@ package com.nibado.example.nqueen;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardTest {
     private Board board;
@@ -24,5 +24,15 @@ public class BoardTest {
         board.set(7, 7);
 
         System.out.println(board);
+    }
+
+    @Test
+    public void testInDiagonal() {
+        board.set(3, 4);
+        assertThat(board.inDiagonal(1, 1)).isFalse();
+        assertThat(board.inDiagonal(1, 2)).isTrue();
+        assertThat(board.inDiagonal(6, 7)).isTrue();
+        assertThat(board.inDiagonal(4, 3)).isTrue();
+        assertThat(board.inDiagonal(1, 6)).isTrue();
     }
 }

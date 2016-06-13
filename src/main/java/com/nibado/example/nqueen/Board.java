@@ -39,6 +39,30 @@ public class Board {
     }
 
     public boolean inDiagonal(int x, int y) {
+        int min = Math.min(x, y);
+
+        int x2 = x - min;
+        int y2 = y - min;
+        while(x2 < size && y2 < size) {
+            if(isSet(x2, y2)) {
+                return true;
+            }
+            x2++;
+            y2++;
+        }
+
+        int max = Math.min(size - x, y);
+        x2 = x + max;
+        y2 = y - max;
+
+        while(x2 >= 0 && y2 < size) {
+            if(isSet(x2, y2)) {
+                return true;
+            }
+            x2--;
+            y2++;
+        }
+
         return false;
     }
 
@@ -51,6 +75,21 @@ public class Board {
 
     public int getCount() {
         return count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Board board = (Board) o;
+
+        return squares.equals(board.squares);
+    }
+
+    @Override
+    public int hashCode() {
+        return squares.hashCode();
     }
 
     @Override
