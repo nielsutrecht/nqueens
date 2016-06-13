@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardTest {
     private Board board;
+
     @Before
     public void setUp() throws Exception {
         board = new Board(8);
@@ -14,6 +15,14 @@ public class BoardTest {
 
     @Test
     public void testToString() throws Exception {
+        String expected = "X . . . . . . .\n" +
+                ". . X . . . . .\n" +
+                ". . . . X . . .\n" +
+                ". . . . . . X .\n" +
+                ". X . . . . . .\n" +
+                ". . . X . . . .\n" +
+                ". . . . . X . .\n" +
+                ". . . . . . . X\n";
         board.set(0, 0);
         board.set(2, 1);
         board.set(4, 2);
@@ -23,7 +32,7 @@ public class BoardTest {
         board.set(5, 6);
         board.set(7, 7);
 
-        System.out.println(board);
+        assertThat(board.toString()).isEqualTo(expected);
     }
 
     @Test

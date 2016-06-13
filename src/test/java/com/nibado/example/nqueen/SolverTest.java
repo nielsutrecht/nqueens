@@ -52,9 +52,7 @@ public class SolverTest {
 
     @Test
     public void testSolve8() {
-        List<Board> solutions = testSolve(8);
-
-        solutions.forEach(System.out::println);
+        testSolve(8);
     }
 
     @Test
