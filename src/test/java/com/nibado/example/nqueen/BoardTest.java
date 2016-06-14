@@ -44,4 +44,30 @@ public class BoardTest {
         assertThat(board.inDiagonal(4, 3)).isTrue();
         assertThat(board.inDiagonal(1, 6)).isTrue();
     }
+
+    @Test
+    public void testRotate() {
+        board = new Board(3);
+        board.set(1, 0);
+        board.set(2, 1);
+        board.set(0, 1);
+
+        Board original = new Board(board);
+
+        board = board.rotate();
+        assertThat(board.isSet(1, 0)).isTrue();
+        assertThat(board.isSet(1, 2)).isTrue();
+        assertThat(board.isSet(0, 0)).isFalse();
+        board = board.rotate();
+        assertThat(board.isSet(0, 1)).isTrue();
+        assertThat(board.isSet(1, 0)).isFalse();
+        assertThat(board.isSet(0, 0)).isFalse();
+        board = board.rotate();
+        assertThat(board.isSet(1, 0)).isTrue();
+        assertThat(board.isSet(2, 1)).isFalse();
+        assertThat(board.isSet(0, 0)).isFalse();
+        board = board.rotate();
+
+        assertThat(board).isEqualTo(original);
+    }
 }

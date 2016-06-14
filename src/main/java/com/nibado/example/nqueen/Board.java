@@ -107,4 +107,63 @@ public class Board {
 
         return b.toString();
     }
+
+    public Board rotate() {
+        Board newBoard = new Board(size);
+
+        double transpose = (size - 1)  / 2.0;
+
+        double cos = Math.cos(Math.PI / 2);
+        double sin = Math.sin(Math.PI / 2);
+
+        for(int y = 0;y < size;y++) {
+            for(int x = 0;x < size;x++) {
+                if(!isSet(x, y)) {
+                    continue;
+                }
+                double dx = x - transpose;
+                double dy = y - transpose;
+
+                double dx2 = dx * cos - dy * sin;
+                double dy2 = dx * sin + dy * cos;
+
+                dx2 += transpose;
+                dy2 += transpose;
+
+                newBoard.set((int)Math.round(dx2), (int)Math.round(dy2));
+            }
+        }
+
+        return newBoard;
+    }
+
+    private static int[] indexMap(int size) {
+        int[] map = new int[size * size];
+
+        double transpose = (size - 1)  / 2.0;
+
+        double cos = Math.cos(Math.PI / 2);
+        double sin = Math.sin(Math.PI / 2);
+
+        for(int y = 0;y < size;y++) {
+            for(int x = 0;x < size;x++) {
+
+                double dx = x - transpose;
+                double dy = y - transpose;
+
+                double dx2 = dx * cos - dy * sin;
+                double dy2 = dx * sin + dy * cos;
+
+                dx2 += transpose;
+                dy2 += transpose;
+
+                int index1 = x + y * size;
+                int index2 = (int)Math.round(dx2) + (int)Math.round(dy2) * size;
+
+                map[index1] = index2;
+            }
+        }
+
+        return map;
+    }
 }
